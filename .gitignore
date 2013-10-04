@@ -1,0 +1,10 @@
+*project.xcworkspace
+*.xccheckout
+*.DS_Store
+*xcuserdata*
+*build*
+*Frameworks*
+Pods/
+Podfile.lock
+.idea
+docs/

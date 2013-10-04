@@ -6,6 +6,7 @@ Takes the CFBundleVersion key value from the Info.plist file and burns it over t
 Requirements
 ------------
 Your xcode project must be configured to use Asset Catalogs.
+![](images/Requirements.png)
 
 Installation
 ------------
@@ -19,6 +20,8 @@ then
     env | "${SRCROOT}/appicon"
 fi
 ```
+At this point your build phases should look similar to this:
+![](images/Configuration.png)
 
 4. Build and Run.
 

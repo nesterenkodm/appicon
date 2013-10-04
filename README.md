@@ -6,7 +6,7 @@ Takes the CFBundleVersion key value from the Info.plist file and burns it over t
 Requirements
 ------------
 Your xcode project must be configured to use Asset Catalogs.
-![](images/Requirements.png)
+![](images/Requirements.png?raw=true)
 
 Installation
 ------------
@@ -21,7 +21,7 @@ then
 fi
 ```
 At this point your build phases should look similar to this:
-![](images/Configuration.png)
+![](images/Configuration.png?raw=true)
 
 4. Build and Run.
 

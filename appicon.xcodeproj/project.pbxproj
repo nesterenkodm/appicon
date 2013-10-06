@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110A848A18018E030062F94D /* NSFileManager+Traverising.m in Sources */ = {isa = PBXBuildFile; fileRef = 110A848918018E030062F94D /* NSFileManager+Traverising.m */; };
 		1116740217FF325900C0C16E /* NSImage+TextOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1116740117FF325900C0C16E /* NSImage+TextOverlay.m */; };
 		1198E08017FD91E600BFB23E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1198E07F17FD91E600BFB23E /* Foundation.framework */; };
 		1198E08317FD91E600BFB23E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1198E08217FD91E600BFB23E /* main.m */; };
@@ -28,6 +29,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		110A848818018E030062F94D /* NSFileManager+Traverising.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Traverising.h"; sourceTree = "<group>"; };
+		110A848918018E030062F94D /* NSFileManager+Traverising.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Traverising.m"; sourceTree = "<group>"; };
 		1116740017FF325900C0C16E /* NSImage+TextOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+TextOverlay.h"; sourceTree = "<group>"; };
 		1116740117FF325900C0C16E /* NSImage+TextOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+TextOverlay.m"; sourceTree = "<group>"; };
 		1198E07C17FD91E600BFB23E /* appicon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = appicon; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +85,8 @@
 			children = (
 				1198E08617FD91E600BFB23E /* appicon.1 */,
 				1198E08217FD91E600BFB23E /* main.m */,
+				110A848818018E030062F94D /* NSFileManager+Traverising.h */,
+				110A848918018E030062F94D /* NSFileManager+Traverising.m */,
 				1116740017FF325900C0C16E /* NSImage+TextOverlay.h */,
 				1116740117FF325900C0C16E /* NSImage+TextOverlay.m */,
 				1198E08417FD91E600BFB23E /* Supporting Files */,
@@ -150,6 +155,7 @@
 			files = (
 				1116740217FF325900C0C16E /* NSImage+TextOverlay.m in Sources */,
 				1198E08317FD91E600BFB23E /* main.m in Sources */,
+				110A848A18018E030062F94D /* NSFileManager+Traverising.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

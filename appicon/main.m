@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NSImage+TextOverlay.h"
+#import "NSFileManager+Traverising.h"
 
 NSDictionary *AIEnvDictionaryFromStdin()
 {
@@ -25,20 +26,6 @@ NSDictionary *AIEnvDictionaryFromStdin()
     }];
     
     return data;
-}
-
-NSArray *AIPathsWithPrefixInFolder(NSString *folder, NSString *prefix)
-{
-    __block NSMutableArray *files = [NSMutableArray new];
-
-    NSDirectoryEnumerator *enumerator = [[NSFileManager defaultManager] enumeratorAtPath:folder];
-    NSString *file;
-    while ((file = enumerator.nextObject)) {
-        if ([[file substringWithRange:NSMakeRange(0, MIN(prefix.length, file.length))] isEqualToString:prefix])
-            [files addObject:[folder stringByAppendingPathComponent:file]];
-    }
-    
-    return files;
 }
 
 NSString *AIBundleVersionFromInfoPlistFileAtPath(NSString *plist)
@@ -68,7 +55,7 @@ int main(int argc, const char * argv[])
         NSDictionary *env = AIEnvDictionaryFromStdin();
         NSLog(@"Using target build dir: %@", env[@"TARGET_BUILD_DIR"]);
         
-        NSArray *appIcons = AIPathsWithPrefixInFolder([env[@"TARGET_BUILD_DIR"] stringByAppendingPathComponent:env[@"CONTENTS_FOLDER_PATH"]], env[@"ASSETCATALOG_COMPILER_APPICON_NAME"]);
+        NSArray *appIcons = [[NSFileManager defaultManager] filesWithPrefix:env[@"ASSETCATALOG_COMPILER_APPICON_NAME"] atPath:[env[@"TARGET_BUILD_DIR"] stringByAppendingPathComponent:env[@"CONTENTS_FOLDER_PATH"]]];
         
         NSString *version = AIBundleVersionFromInfoPlistFileAtPath([env[@"TARGET_BUILD_DIR"] stringByAppendingPathComponent:env[@"INFOPLIST_PATH"]]);
 

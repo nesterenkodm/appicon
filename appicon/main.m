@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NSImage+TextOverlay.h"
-#import "NSFileManager+Traverising.h"
+#import "NSFileManager+Traversing.h"
 
 NSDictionary *AIEnvDictionaryFromStdin()
 {

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSFileManager (Traverising)
+@interface NSFileManager (Traversing)
 
 - (NSArray *)filesWithPrefix:(NSString *)prefix atPath:(NSString *)path;
 

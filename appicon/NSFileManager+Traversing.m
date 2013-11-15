@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 chebur. All rights reserved.
 //
 
-#import "NSFileManager+Traverising.h"
+#import "NSFileManager+Traversing.h"
 
-@implementation NSFileManager (Traverising)
+@implementation NSFileManager (Traversing)
 
 - (NSArray *)filesWithPrefix:(NSString *)prefix atPath:(NSString *)path
 {

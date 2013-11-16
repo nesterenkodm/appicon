@@ -10,10 +10,15 @@
 #import "NSImage+TextOverlay.h"
 #import "NSFileManager+Traversing.h"
 
-NSDictionary *AIEnvDictionaryFromStdin()
+NSString * const AIEnvTargetBuildDirKey = @"TARGET_BUILD_DIR";
+NSString * const AIEnvAssetCatalogCompilerAppiiconNameKey = @"ASSETCATALOG_COMPILER_APPICON_NAME";
+NSString * const AIEnvContentsFolderPathKey = @"CONTENTS_FOLDER_PATH";
+NSString * const AIEnvInfoPlistPathKey = @"INFOPLIST_PATH";
+NSString * const AILocaleDefaultIdentifier = @"ru_RU";
+
+NSDictionary *AIEnvDictionaryWithFileHandle(NSFileHandle *fileHandle)
 {
-    NSFileHandle *input = [NSFileHandle fileHandleWithStandardInput];
-    NSData *inputData = [NSData dataWithData:[input readDataToEndOfFile]];
+    NSData *inputData = [NSData dataWithData:[fileHandle readDataToEndOfFile]];
     NSString *inputString = [[NSString alloc] initWithData:inputData encoding:NSUTF8StringEncoding];
     
     __block NSDictionary *data = [NSMutableDictionary new];
@@ -28,17 +33,17 @@ NSDictionary *AIEnvDictionaryFromStdin()
     return data;
 }
 
-NSString *AIBundleVersionFromInfoPlistFileAtPath(NSString *plist)
+NSString *AIValueForInfoPlistKeyAtPath(NSString *key, NSString *plist)
 {
     NSDictionary *data = [[NSDictionary alloc] initWithContentsOfFile:plist];
-    return data[(NSString *)kCFBundleVersionKey];
+    return data[key];
 }
 
 typedef NS_ENUM(NSInteger, AIBurnTextOnImageOption) {
     AIBurnTextOnImageOptionUseBackupCopy = 1 // backup original image if not have been backuped already. And use backuped copy for image processing
 };
 
-BOOL AIBurnTextOnImageAtPath(NSString *text, NSString *imagePath, AIBurnTextOnImageOption options)
+BOOL AIBurnTextOverImageAtPath(NSString *text, NSString *imagePath, AIBurnTextOnImageOption options)
 {
     NSImage *image;
     if (options & AIBurnTextOnImageOptionUseBackupCopy) {
@@ -58,11 +63,13 @@ BOOL AIBurnTextOnImageAtPath(NSString *text, NSString *imagePath, AIBurnTextOnIm
     NSShadow *shadow = [NSShadow new];
     shadow.shadowOffset = CGSizeMake(0.5, -0.5);
     shadow.shadowColor = [NSColor colorWithCalibratedWhite:0.0 alpha:0.3];
+    NSMutableParagraphStyle *paragrapStyle = [NSMutableParagraphStyle new];
+    paragrapStyle.alignment = NSCenterTextAlignment;
     NSDictionary *attributes = @{NSForegroundColorAttributeName: [NSColor whiteColor],
+                                 NSParagraphStyleAttributeName: paragrapStyle,
                                  NSFontAttributeName: [NSFont fontWithName:@"Menlo" size:6],
                                  NSShadowAttributeName: shadow};
-    NSSize textSize = [text sizeWithAttributes:attributes];
-    [image drawText:text withAttributes:attributes inRect:NSMakeRect(image.size.width / 2.0 - textSize.width / 2.0, - image.size.height + textSize.height + 3, image.size.width, image.size.height)];
+    [image drawText:text withAttributes:attributes inRect:NSMakeRect(0, 0, image.size.width, 20)];
     
     return [image writeUsingImageType:NSPNGFileType toFile:imagePath];
 }
@@ -70,17 +77,24 @@ BOOL AIBurnTextOnImageAtPath(NSString *text, NSString *imagePath, AIBurnTextOnIm
 int main(int argc, const char * argv[])
 {
     @autoreleasepool {
-        NSDictionary *env = AIEnvDictionaryFromStdin();
-        NSLog(@"Using target build dir: %@", env[@"TARGET_BUILD_DIR"]);
-        
-        NSArray *appIcons = [[NSFileManager defaultManager] filesWithPrefix:env[@"ASSETCATALOG_COMPILER_APPICON_NAME"] atPath:[env[@"TARGET_BUILD_DIR"] stringByAppendingPathComponent:env[@"CONTENTS_FOLDER_PATH"]]];
-        
-        NSString *version = AIBundleVersionFromInfoPlistFileAtPath([env[@"TARGET_BUILD_DIR"] stringByAppendingPathComponent:env[@"INFOPLIST_PATH"]]);
+        NSDictionary *env = AIEnvDictionaryWithFileHandle([NSFileHandle fileHandleWithStandardInput]);
+//        NSDictionary *env = AIEnvDictionaryWithFileHandle([NSFileHandle fileHandleForReadingAtPath:@"/Users/chebur/Desktop/env.txt"]);
+
+        NSArray *appIcons = [[NSFileManager defaultManager] filesWithPrefix:env[AIEnvAssetCatalogCompilerAppiiconNameKey] atPath:[env[AIEnvTargetBuildDirKey] stringByAppendingPathComponent:env[AIEnvContentsFolderPathKey]]];
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        calendar.locale = [NSLocale localeWithLocaleIdentifier:AILocaleDefaultIdentifier];
+        NSDateFormatter *dateFormatter = [NSDateFormatter new];
+        dateFormatter.calendar = calendar;
+        dateFormatter.locale = calendar.locale;
+        dateFormatter.dateStyle = kCFDateFormatterShortStyle;
+        NSString *text = [NSString stringWithFormat:@"%@\n%@",
+                          AIValueForInfoPlistKeyAtPath((NSString *)kCFBundleVersionKey, [env[AIEnvTargetBuildDirKey] stringByAppendingPathComponent:env[AIEnvInfoPlistPathKey]]),
+                          [[dateFormatter stringFromDate:[NSDate date]] stringByReplacingOccurrencesOfString:@" " withString:@" "]];
 
         [appIcons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSLog(@"Burning \"%@\" to the image named %@", version, [obj lastPathComponent]);
-            BOOL result = AIBurnTextOnImageAtPath(version, obj, AIBurnTextOnImageOptionUseBackupCopy);
-            NSCAssert(result, @"Can't burn text on image at path %@", obj);
+            NSLog(@"Processing image at path %@", obj);
+            BOOL result = AIBurnTextOverImageAtPath(text, obj, AIBurnTextOnImageOptionUseBackupCopy);
+            NSCAssert(result, @"Can't burn text over image at path %@", obj);
             
             *stop = result == NO;
         }];

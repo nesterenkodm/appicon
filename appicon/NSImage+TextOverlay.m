@@ -12,9 +12,12 @@
 
 - (void)drawText:(NSString *)text withAttributes:(NSDictionary *)attributes inRect:(NSRect)rect;
 {
-    [self lockFocus];
-    [text drawInRect:rect withAttributes:attributes];
-    [self unlockFocus];
+    [self lockFocus]; {
+        [[NSColor colorWithCalibratedWhite:0.0 alpha:0.4] setFill];
+        NSRectFillUsingOperation(rect, NSCompositeSourceAtop);
+        
+        [text drawInRect:rect withAttributes:attributes];
+    } [self unlockFocus];
 }
 
 - (BOOL)writeUsingImageType:(NSBitmapImageFileType)imageType toFile:(NSString *)file

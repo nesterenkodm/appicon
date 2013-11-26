@@ -3,6 +3,8 @@ appicon
 
 Takes the CFBundleVersion key value from the Info.plist file and burns it over the AppIcon image
 
+![](images/AppIconTest57x57@2x.png?raw=true)
+
 Requirements
 ------------
 Your xcode project must be configured to use Asset Catalogs.

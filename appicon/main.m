@@ -73,7 +73,7 @@ BOOL AIBurnTextOverImageAtPath(NSString *text, NSString *imagePath, AIBurnTextOn
     paragrapStyle.alignment = NSCenterTextAlignment;
     NSDictionary *attributes = @{NSForegroundColorAttributeName: [NSColor whiteColor],
                                  NSParagraphStyleAttributeName: paragrapStyle,
-                                 NSFontAttributeName: [NSFont fontWithName:@"Menlo" size:6],
+                                 NSFontAttributeName: [NSFont fontWithName:@"Menlo" size:7 * imageRep.pixelsWide / imageRep.size.width],
                                  NSShadowAttributeName: shadow};
     image = [image imageByOverlayingText:text withAttributes:attributes inRect:NSMakeRect(0, 0, image.size.width, 22)];
 

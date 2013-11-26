@@ -99,7 +99,7 @@ int main(int argc, const char * argv[])
 
         [appIcons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSLog(@"Processing image at path %@", obj);
-            BOOL result = AIBurnTextOverImageAtPath(text, obj, AIBurnTextOnImageOptionUseBackupCopy);
+            BOOL result = AIBurnTextOverImageAtPath(text, obj, AIBurnTextOverImageOptionUseBackupCopy);
             NSCAssert(result, @"Can't burn text over image at path %@", obj);
             
             *stop = result == NO;

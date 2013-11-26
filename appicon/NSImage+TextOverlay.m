@@ -23,7 +23,7 @@
 - (BOOL)writeUsingImageType:(NSBitmapImageFileType)imageType toFile:(NSString *)file
 {
     NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:self.TIFFRepresentation];
-    NSData *data = [imageRep representationUsingType:imageType properties:@{NSImageCompressionFactor: @1.0}];
+    NSData *data = [imageRep representationUsingType:imageType properties:nil];
     return [data writeToFile:file atomically:YES];
 }
 

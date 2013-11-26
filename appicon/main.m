@@ -39,14 +39,14 @@ NSString *AIValueForInfoPlistKeyAtPath(NSString *key, NSString *plist)
     return data[key];
 }
 
-typedef NS_ENUM(NSInteger, AIBurnTextOnImageOption) {
-    AIBurnTextOnImageOptionUseBackupCopy = 1 // backup original image if not have been backuped already. And use backuped copy for image processing
+typedef NS_OPTIONS(NSInteger, AIBurnTextOverImageOption) {
+    AIBurnTextOverImageOptionUseBackupCopy = 1 // backup original image if not have been backuped already. And use backuped copy for image processing
 };
 
-BOOL AIBurnTextOverImageAtPath(NSString *text, NSString *imagePath, AIBurnTextOnImageOption options)
+BOOL AIBurnTextOverImageAtPath(NSString *text, NSString *imagePath, AIBurnTextOverImageOption options)
 {
     NSImage *image;
-    if (options & AIBurnTextOnImageOptionUseBackupCopy) {
+    if (options & AIBurnTextOverImageOptionUseBackupCopy) {
         NSString *lastPathComponent = [NSString stringWithFormat:@".%@", imagePath.lastPathComponent];
         NSString *backupPath = [imagePath.stringByDeletingLastPathComponent stringByAppendingPathComponent:lastPathComponent];
         if (![[NSFileManager defaultManager] isReadableFileAtPath:backupPath]) {

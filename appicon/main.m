@@ -69,8 +69,8 @@ BOOL AIBurnTextOverImageAtPath(NSString *text, NSString *imagePath, AIBurnTextOn
                                  NSParagraphStyleAttributeName: paragrapStyle,
                                  NSFontAttributeName: [NSFont fontWithName:@"Menlo" size:6],
                                  NSShadowAttributeName: shadow};
-    [image drawText:text withAttributes:attributes inRect:NSMakeRect(0, 0, image.size.width, 20)];
-    
+    image = [image imageByOverlayingText:text withAttributes:attributes inRect:NSMakeRect(0, 0, image.size.width, 22)];
+
     return [image writeUsingImageType:NSPNGFileType toFile:imagePath];
 }
 

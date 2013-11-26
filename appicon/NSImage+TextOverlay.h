@@ -10,7 +10,7 @@
 
 @interface NSImage (TextOverlay)
 
-- (void)drawText:(NSString *)text withAttributes:(NSDictionary *)attributes inRect:(NSRect)rect;
+- (NSImage *)imageByOverlayingText:(NSString *)text withAttributes:(NSDictionary *)attributes inRect:(NSRect)rect;
 - (BOOL)writeUsingImageType:(NSBitmapImageFileType)imageType toFile:(NSString *)file;
 
 @end

@@ -59,6 +59,12 @@ BOOL AIBurnTextOverImageAtPath(NSString *text, NSString *imagePath, AIBurnTextOn
     } else
         image = [[NSImage alloc] initWithContentsOfFile:imagePath];
 
+    // hint NSImage that "@2x~ipad.png" image should be treated as HD image
+    NSImageRep *imageRep = [image bestRepresentationForRect:NSMakeRect(0, 0, image.size.width, image.size.height) context:nil hints:nil];
+    if ([imagePath rangeOfString:@"@2x~ipad.png" options:NSBackwardsSearch].location == imagePath.length - 12) {
+        imageRep.size =
+        image.size = NSMakeSize(image.size.width / 2.0, image.size.height / 2.0);
+    }
     
     NSShadow *shadow = [NSShadow new];
     shadow.shadowOffset = CGSizeMake(0.5, -0.5);

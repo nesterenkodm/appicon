@@ -87,15 +87,9 @@ int main(int argc, const char * argv[])
 //        NSDictionary *env = AIEnvDictionaryWithFileHandle([NSFileHandle fileHandleForReadingAtPath:@"/Users/chebur/Desktop/env.txt"]);
 
         NSArray *appIcons = [[NSFileManager defaultManager] filesWithPrefix:env[AIEnvAssetCatalogCompilerAppiiconNameKey] atPath:[env[AIEnvTargetBuildDirKey] stringByAppendingPathComponent:env[AIEnvContentsFolderPathKey]]];
-        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        calendar.locale = [NSLocale localeWithLocaleIdentifier:AILocaleDefaultIdentifier];
-        NSDateFormatter *dateFormatter = [NSDateFormatter new];
-        dateFormatter.calendar = calendar;
-        dateFormatter.locale = calendar.locale;
-        dateFormatter.dateStyle = kCFDateFormatterShortStyle;
         NSString *text = [NSString stringWithFormat:@"%@\n%@",
-                          AIValueForInfoPlistKeyAtPath((NSString *)kCFBundleVersionKey, [env[AIEnvTargetBuildDirKey] stringByAppendingPathComponent:env[AIEnvInfoPlistPathKey]]),
-                          [[dateFormatter stringFromDate:[NSDate date]] stringByReplacingOccurrencesOfString:@" " withString:@" "]];
+                          AIValueForInfoPlistKeyAtPath(@"CFBundleShortVersionString", [env[AIEnvTargetBuildDirKey] stringByAppendingPathComponent:env[AIEnvInfoPlistPathKey]]),
+                          AIValueForInfoPlistKeyAtPath((NSString *)kCFBundleVersionKey, [env[AIEnvTargetBuildDirKey] stringByAppendingPathComponent:env[AIEnvInfoPlistPathKey]])];
 
         [appIcons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             NSLog(@"Processing image at path %@", obj);

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NSImage+TextOverlay.h"
 #import "appicon-Swift.h"
 
 NSString * const AIEnvTargetBuildDirKey = @"TARGET_BUILD_DIR";

@@ -12,6 +12,7 @@
 		1198E08F17FD9C0000BFB23E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1198E08E17FD9C0000BFB23E /* Cocoa.framework */; };
 		11A0035B1950828C002D6637 /* NSFileManager+Traversing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A0035A1950828C002D6637 /* NSFileManager+Traversing.swift */; };
 		11B4BA34195083DD006C77B7 /* NSImage+TextOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4BA33195083DD006C77B7 /* NSImage+TextOverlay.swift */; };
+		11B4BA361950A0D0006C77B7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4BA351950A0D0006C77B7 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,7 @@
 		1198E08E17FD9C0000BFB23E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		11A0035A1950828C002D6637 /* NSFileManager+Traversing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+Traversing.swift"; sourceTree = "<group>"; };
 		11B4BA33195083DD006C77B7 /* NSImage+TextOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+TextOverlay.swift"; sourceTree = "<group>"; };
+		11B4BA351950A0D0006C77B7 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				1198E08217FD91E600BFB23E /* main.m */,
+				11B4BA351950A0D0006C77B7 /* main.swift */,
 				11A0035A1950828C002D6637 /* NSFileManager+Traversing.swift */,
 				11B4BA33195083DD006C77B7 /* NSImage+TextOverlay.swift */,
 				1198E08417FD91E600BFB23E /* Supporting Files */,
@@ -147,6 +150,7 @@
 			files = (
 				1198E08317FD91E600BFB23E /* main.m in Sources */,
 				11B4BA34195083DD006C77B7 /* NSImage+TextOverlay.swift in Sources */,
+				11B4BA361950A0D0006C77B7 /* main.swift in Sources */,
 				11A0035B1950828C002D6637 /* NSFileManager+Traversing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

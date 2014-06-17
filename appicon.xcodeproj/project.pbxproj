@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1198E08017FD91E600BFB23E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1198E07F17FD91E600BFB23E /* Foundation.framework */; };
-		1198E08317FD91E600BFB23E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1198E08217FD91E600BFB23E /* main.m */; };
 		1198E08F17FD9C0000BFB23E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1198E08E17FD9C0000BFB23E /* Cocoa.framework */; };
 		11A0035B1950828C002D6637 /* NSFileManager+Traversing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A0035A1950828C002D6637 /* NSFileManager+Traversing.swift */; };
 		11B4BA34195083DD006C77B7 /* NSImage+TextOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4BA33195083DD006C77B7 /* NSImage+TextOverlay.swift */; };
@@ -30,8 +29,6 @@
 /* Begin PBXFileReference section */
 		1198E07C17FD91E600BFB23E /* appicon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = appicon; sourceTree = BUILT_PRODUCTS_DIR; };
 		1198E07F17FD91E600BFB23E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1198E08217FD91E600BFB23E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1198E08517FD91E600BFB23E /* appicon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "appicon-Prefix.pch"; sourceTree = "<group>"; };
 		1198E08E17FD9C0000BFB23E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		11A0035A1950828C002D6637 /* NSFileManager+Traversing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+Traversing.swift"; sourceTree = "<group>"; };
 		11B4BA33195083DD006C77B7 /* NSImage+TextOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+TextOverlay.swift"; sourceTree = "<group>"; };
@@ -80,21 +77,11 @@
 		1198E08117FD91E600BFB23E /* appicon */ = {
 			isa = PBXGroup;
 			children = (
-				1198E08217FD91E600BFB23E /* main.m */,
 				11B4BA351950A0D0006C77B7 /* main.swift */,
 				11A0035A1950828C002D6637 /* NSFileManager+Traversing.swift */,
 				11B4BA33195083DD006C77B7 /* NSImage+TextOverlay.swift */,
-				1198E08417FD91E600BFB23E /* Supporting Files */,
 			);
 			path = appicon;
-			sourceTree = "<group>";
-		};
-		1198E08417FD91E600BFB23E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				1198E08517FD91E600BFB23E /* appicon-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,7 +135,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1198E08317FD91E600BFB23E /* main.m in Sources */,
 				11B4BA34195083DD006C77B7 /* NSImage+TextOverlay.swift in Sources */,
 				11B4BA361950A0D0006C77B7 /* main.swift in Sources */,
 				11A0035B1950828C002D6637 /* NSFileManager+Traversing.swift in Sources */,
@@ -235,11 +221,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "appicon/appicon-Prefix.pch";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -247,9 +229,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "appicon/appicon-Prefix.pch";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

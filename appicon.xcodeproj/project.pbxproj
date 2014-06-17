@@ -11,7 +11,6 @@
 		1116740217FF325900C0C16E /* NSImage+TextOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1116740117FF325900C0C16E /* NSImage+TextOverlay.m */; };
 		1198E08017FD91E600BFB23E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1198E07F17FD91E600BFB23E /* Foundation.framework */; };
 		1198E08317FD91E600BFB23E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1198E08217FD91E600BFB23E /* main.m */; };
-		1198E08717FD91E600BFB23E /* appicon.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1198E08617FD91E600BFB23E /* appicon.1 */; };
 		1198E08F17FD9C0000BFB23E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1198E08E17FD9C0000BFB23E /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -22,7 +21,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				1198E08717FD91E600BFB23E /* appicon.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -37,7 +35,6 @@
 		1198E07F17FD91E600BFB23E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1198E08217FD91E600BFB23E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1198E08517FD91E600BFB23E /* appicon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "appicon-Prefix.pch"; sourceTree = "<group>"; };
-		1198E08617FD91E600BFB23E /* appicon.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = appicon.1; sourceTree = "<group>"; };
 		1198E08E17FD9C0000BFB23E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -83,7 +80,6 @@
 		1198E08117FD91E600BFB23E /* appicon */ = {
 			isa = PBXGroup;
 			children = (
-				1198E08617FD91E600BFB23E /* appicon.1 */,
 				1198E08217FD91E600BFB23E /* main.m */,
 				110A848818018E030062F94D /* NSFileManager+Traversing.h */,
 				110A848918018E030062F94D /* NSFileManager+Traversing.m */,

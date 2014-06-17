@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NSImage+TextOverlay.h"
-#import "NSFileManager+Traversing.h"
+#import "appicon-Swift.h"
 
 NSString * const AIEnvTargetBuildDirKey = @"TARGET_BUILD_DIR";
 NSString * const AIEnvAssetCatalogCompilerAppiiconNameKey = @"ASSETCATALOG_COMPILER_APPICON_NAME";

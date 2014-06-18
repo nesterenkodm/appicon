@@ -7,12 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		110A848A18018E030062F94D /* NSFileManager+Traversing.m in Sources */ = {isa = PBXBuildFile; fileRef = 110A848918018E030062F94D /* NSFileManager+Traversing.m */; };
-		1116740217FF325900C0C16E /* NSImage+TextOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1116740117FF325900C0C16E /* NSImage+TextOverlay.m */; };
-		1198E08017FD91E600BFB23E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1198E07F17FD91E600BFB23E /* Foundation.framework */; };
-		1198E08317FD91E600BFB23E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1198E08217FD91E600BFB23E /* main.m */; };
-		1198E08717FD91E600BFB23E /* appicon.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1198E08617FD91E600BFB23E /* appicon.1 */; };
-		1198E08F17FD9C0000BFB23E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1198E08E17FD9C0000BFB23E /* Cocoa.framework */; };
+		11A0035B1950828C002D6637 /* NSFileManager+Traversing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A0035A1950828C002D6637 /* NSFileManager+Traversing.swift */; };
+		11B4BA34195083DD006C77B7 /* NSImage+TextOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4BA33195083DD006C77B7 /* NSImage+TextOverlay.swift */; };
+		11B4BA361950A0D0006C77B7 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4BA351950A0D0006C77B7 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -22,23 +19,16 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				1198E08717FD91E600BFB23E /* appicon.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		110A848818018E030062F94D /* NSFileManager+Traversing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+Traversing.h"; sourceTree = "<group>"; };
-		110A848918018E030062F94D /* NSFileManager+Traversing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+Traversing.m"; sourceTree = "<group>"; };
-		1116740017FF325900C0C16E /* NSImage+TextOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+TextOverlay.h"; sourceTree = "<group>"; };
-		1116740117FF325900C0C16E /* NSImage+TextOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+TextOverlay.m"; sourceTree = "<group>"; };
 		1198E07C17FD91E600BFB23E /* appicon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = appicon; sourceTree = BUILT_PRODUCTS_DIR; };
-		1198E07F17FD91E600BFB23E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1198E08217FD91E600BFB23E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1198E08517FD91E600BFB23E /* appicon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "appicon-Prefix.pch"; sourceTree = "<group>"; };
-		1198E08617FD91E600BFB23E /* appicon.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = appicon.1; sourceTree = "<group>"; };
-		1198E08E17FD9C0000BFB23E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		11A0035A1950828C002D6637 /* NSFileManager+Traversing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+Traversing.swift"; sourceTree = "<group>"; };
+		11B4BA33195083DD006C77B7 /* NSImage+TextOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSImage+TextOverlay.swift"; sourceTree = "<group>"; };
+		11B4BA351950A0D0006C77B7 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,8 +36,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1198E08F17FD9C0000BFB23E /* Cocoa.framework in Frameworks */,
-				1198E08017FD91E600BFB23E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				1198E08117FD91E600BFB23E /* appicon */,
-				1198E07E17FD91E600BFB23E /* Frameworks */,
 				1198E07D17FD91E600BFB23E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,35 +58,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1198E07E17FD91E600BFB23E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1198E08E17FD9C0000BFB23E /* Cocoa.framework */,
-				1198E07F17FD91E600BFB23E /* Foundation.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		1198E08117FD91E600BFB23E /* appicon */ = {
 			isa = PBXGroup;
 			children = (
-				1198E08617FD91E600BFB23E /* appicon.1 */,
-				1198E08217FD91E600BFB23E /* main.m */,
-				110A848818018E030062F94D /* NSFileManager+Traversing.h */,
-				110A848918018E030062F94D /* NSFileManager+Traversing.m */,
-				1116740017FF325900C0C16E /* NSImage+TextOverlay.h */,
-				1116740117FF325900C0C16E /* NSImage+TextOverlay.m */,
-				1198E08417FD91E600BFB23E /* Supporting Files */,
+				11B4BA351950A0D0006C77B7 /* main.swift */,
+				11A0035A1950828C002D6637 /* NSFileManager+Traversing.swift */,
+				11B4BA33195083DD006C77B7 /* NSImage+TextOverlay.swift */,
 			);
 			path = appicon;
-			sourceTree = "<group>";
-		};
-		1198E08417FD91E600BFB23E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				1198E08517FD91E600BFB23E /* appicon-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,9 +119,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1116740217FF325900C0C16E /* NSImage+TextOverlay.m in Sources */,
-				1198E08317FD91E600BFB23E /* main.m in Sources */,
-				110A848A18018E030062F94D /* NSFileManager+Traversing.m in Sources */,
+				11B4BA34195083DD006C77B7 /* NSImage+TextOverlay.swift in Sources */,
+				11B4BA361950A0D0006C77B7 /* main.swift in Sources */,
+				11A0035B1950828C002D6637 /* NSFileManager+Traversing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +134,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -176,11 +143,12 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -190,12 +158,13 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -205,6 +174,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -213,19 +183,20 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -233,8 +204,7 @@
 		1198E08B17FD91E600BFB23E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "appicon/appicon-Prefix.pch";
+				CLANG_ENABLE_MODULES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -242,8 +212,7 @@
 		1198E08C17FD91E600BFB23E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "appicon/appicon-Prefix.pch";
+				CLANG_ENABLE_MODULES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

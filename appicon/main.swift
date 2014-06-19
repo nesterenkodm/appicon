@@ -94,7 +94,13 @@ autoreleasepool {
     let textSecondLine = AIValueForInfoPlistKeyAtPath(kCFBundleVersionKey, env[AIEnvDictionaryKey.TargetBuildDir.toRaw()]!.stringByAppendingPathComponent(env[AIEnvDictionaryKey.InfoPlistPathKey.toRaw()]!))
     let text = "\(textFirstLine)\n\(textSecondLine)"
 
-    let appIcons = NSFileManager.defaultManager().filesWithPrefix(env[AIEnvDictionaryKey.AssetCatalogCompilerAppiconName.toRaw()]!, atPath: env[AIEnvDictionaryKey.TargetBuildDir.toRaw()]!.stringByAppendingPathComponent(env[AIEnvDictionaryKey.ContentsFolderPath.toRaw()]!))
+    let path = env[AIEnvDictionaryKey.TargetBuildDir.toRaw()]!.stringByAppendingPathComponent(env[AIEnvDictionaryKey.ContentsFolderPath.toRaw()]!)
+    let appIcons = NSFileManager.defaultManager().filesWithPrefix(env[AIEnvDictionaryKey.AssetCatalogCompilerAppiconName.toRaw()]!, atPath: path)
+    if appIcons.count == 0 {
+        NSLog("No app icons found at path \(path)")
+        return
+    }
+
     for path in appIcons {
         NSLog("Processing image at path \(path)")
         let result = AIBurnTextOverImageAtPath(text, path, AIBurnTextOverImageOption.UseBackupCopy.toRaw())

@@ -13,8 +13,12 @@ extension NSFileManager {
     func filesWithPrefix(prefix: String, atPath path: String) -> String[] {
         var files: String[] = []
     
-        let enumerator = NSFileManager.defaultManager().enumeratorAtPath(path)
-        while let file = enumerator.nextObject() as? String {
+        let enumerator: NSDirectoryEnumerator? = NSFileManager.defaultManager().enumeratorAtPath(path)
+        if (!enumerator) {
+            return files
+        }
+        
+        while let file = enumerator!.nextObject() as? String {
             if file.hasPrefix(prefix) {
                 files += path.stringByAppendingPathComponent(file)
             }

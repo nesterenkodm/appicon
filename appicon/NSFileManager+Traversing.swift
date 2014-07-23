@@ -1,5 +1,5 @@
 //
-//  NSFileManager+Traversal.swift
+//  NSFileManager+Traversing.swift
 //  appicon
 //
 //  Created by Dmitry Nesterenko on 17.06.14.
@@ -10,21 +10,18 @@ import Foundation
 
 extension NSFileManager {
     
-    func filesWithPrefix(prefix: String, atPath path: String) -> String[] {
-        var files: String[] = []
-    
-        let enumerator: NSDirectoryEnumerator? = NSFileManager.defaultManager().enumeratorAtPath(path)
-        if (!enumerator) {
+    func filesWithPrefix(prefix: String, atPath path: String) -> [String]? {
+        if let enumerator = NSFileManager.defaultManager().enumeratorAtPath(path) {
+            var files: [String] = []
+            while let file = enumerator.nextObject() as? String {
+                if file.hasPrefix(prefix) {
+                    files.append(path.stringByAppendingPathComponent(file))
+                }
+            }
             return files
         }
         
-        while let file = enumerator!.nextObject() as? String {
-            if file.hasPrefix(prefix) {
-                files += path.stringByAppendingPathComponent(file)
-            }
-        }
-    
-        return files
+        return nil
     }
     
 }

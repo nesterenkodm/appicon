@@ -8,8 +8,6 @@
 
 import AppKit
 
-let AILocaledDefaultIdentifier = "ru_RU"
-
 enum AIEnvDictionaryKey : String {
     case TargetBuildDir = "TARGET_BUILD_DIR"
     case AssetCatalogCompilerAppiconName = "ASSETCATALOG_COMPILER_APPICON_NAME"

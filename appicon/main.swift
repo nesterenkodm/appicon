@@ -96,8 +96,8 @@ func AIBurnTextOverImageAtPath(text: String, imagePath: String, options: UInt8) 
 }
 
 autoreleasepool {
-//    let env = AIEnvDictionaryWithFileHandle(NSFileHandle.fileHandleWithStandardInput())
-    let env = AIEnvDictionaryWithFileHandle(NSFileHandle(forReadingAtPath: "/Users/chebur/Desktop/env.txt")!)
+    let env = AIEnvDictionaryWithFileHandle(NSFileHandle.fileHandleWithStandardInput())
+//    let env = AIEnvDictionaryWithFileHandle(NSFileHandle(forReadingAtPath: "/Users/chebur/Desktop/env.txt")!)
 
     let textFirstLine = AIValueForInfoPlistKeyAtPath("CFBundleShortVersionString", env[AIEnvDictionaryKey.TargetBuildDir.rawValue]!.stringByAppendingPathComponent(env[AIEnvDictionaryKey.InfoPlistPathKey.rawValue]!)) ?? "-"
     let textSecondLine = AIValueForInfoPlistKeyAtPath(String(kCFBundleVersionKey), env[AIEnvDictionaryKey.TargetBuildDir.rawValue]!.stringByAppendingPathComponent(env[AIEnvDictionaryKey.InfoPlistPathKey.rawValue]!)) ?? "-"

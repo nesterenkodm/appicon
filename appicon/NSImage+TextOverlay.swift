@@ -16,7 +16,7 @@ extension NSImage {
             var proposedRect = NSRect(x: 0, y: 0, width: imageRep.pixelsWide, height: imageRep.pixelsHigh)
             let image = self.CGImageForProposedRect(&proposedRect, context: nil, hints: nil)?.takeUnretainedValue()
             let colorSpace = CGImageGetColorSpace(image)
-            let bitmapContext = CGBitmapContextCreate(UnsafeMutablePointer.null(), UInt(proposedRect.width), UInt(proposedRect.height), CGImageGetBitsPerComponent(image), 0, colorSpace, CGBitmapInfo(CGImageAlphaInfo.PremultipliedFirst.rawValue))
+            let bitmapContext = CGBitmapContextCreate(nil, Int(proposedRect.width), Int(proposedRect.height), CGImageGetBitsPerComponent(image), 0, colorSpace, CGBitmapInfo(CGImageAlphaInfo.PremultipliedFirst.rawValue))
 
             // drawing
 //            let bitmapContextAddress = unsafeBitCast(bitmapContext, Int.self)
@@ -43,7 +43,7 @@ extension NSImage {
     func writeUsingImageType(imageType: NSBitmapImageFileType, toFile file: String) -> Bool? {
         if let data = self.TIFFRepresentation {
             let imageRep = NSBitmapImageRep(data: data)
-            if let data = imageRep?.representationUsingType(imageType, properties: NSDictionary()) {
+            if let data = imageRep?.representationUsingType(imageType, properties: NSDictionary() as [NSObject : AnyObject]) {
                 return data.writeToFile(file, atomically: true)
             }
         }

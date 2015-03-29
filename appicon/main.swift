@@ -17,7 +17,7 @@ enum AIEnvDictionaryKey : String {
 
 func AIEnvDictionaryWithFileHandle(fileHandle: NSFileHandle) -> [String: String] {
     let inputData = NSData(data: fileHandle.readDataToEndOfFile())
-    var inputString = NSString(data: inputData, encoding: NSUTF8StringEncoding) as String
+    var inputString = NSString(data: inputData, encoding: NSUTF8StringEncoding) as! String
     
     var data = Dictionary<String, String>()
 
@@ -32,7 +32,7 @@ func AIEnvDictionaryWithFileHandle(fileHandle: NSFileHandle) -> [String: String]
 
 func AIValueForInfoPlistKeyAtPath(key: String, plist: String) -> String? {
     if let data = NSDictionary(contentsOfFile: plist) {
-        return data[key] as String?
+        return data[key] as? String
     }
     return nil
 }

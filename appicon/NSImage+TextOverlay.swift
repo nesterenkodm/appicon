@@ -19,9 +19,7 @@ extension NSImage {
             let bitmapContext = CGBitmapContextCreate(nil, Int(proposedRect.width), Int(proposedRect.height), CGImageGetBitsPerComponent(image), 0, colorSpace, CGBitmapInfo(CGImageAlphaInfo.PremultipliedFirst.rawValue))
 
             // drawing
-//            let bitmapContextAddress = unsafeBitCast(bitmapContext, Int.self)
-//            let bitmapContextPointer = UnsafePointer<CGContext>(bitmapContextAddress)
-            let context = NSGraphicsContext(CGContext: bitmapContext, flipped: false)// t(graphicsPort: bitmapContext, flipped: false)
+            let context = NSGraphicsContext(CGContext: bitmapContext, flipped: false)
             NSGraphicsContext.setCurrentContext(context)
             CGContextDrawImage(bitmapContext, proposedRect, image)
             CGContextSetFillColorWithColor(bitmapContext, NSColor(calibratedWhite: 0, alpha: 0.4).CGColor)

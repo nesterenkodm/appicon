@@ -10,13 +10,16 @@ import AppKit
 
 extension NSImage {
     
-    func imageByOverlayingText(text: String, withAttributes attributes: [NSObject : AnyObject], inRect rect: NSRect) -> NSImage? {
+    func imageByOverlayingText(text: String, withAttributes attributes: [String : AnyObject], inRect rect: NSRect) -> NSImage? {
         // configure bitmap context
         if let imageRep = self.bestRepresentationForRect(NSRect(x: 0, y: 0, width: self.size.width, height: self.size.height), context: nil, hints: nil) {
             var proposedRect = NSRect(x: 0, y: 0, width: imageRep.pixelsWide, height: imageRep.pixelsHigh)
-            let image = self.CGImageForProposedRect(&proposedRect, context: nil, hints: nil)?.takeUnretainedValue()
+            let image = self.CGImageForProposedRect(&proposedRect, context: nil, hints: nil)
             let colorSpace = CGImageGetColorSpace(image)
-            let bitmapContext = CGBitmapContextCreate(nil, Int(proposedRect.width), Int(proposedRect.height), CGImageGetBitsPerComponent(image), 0, colorSpace, CGBitmapInfo(CGImageAlphaInfo.PremultipliedFirst.rawValue))
+            let data = UnsafeMutablePointer<Void>()
+            guard let bitmapContext = CGBitmapContextCreate(data, Int(proposedRect.width), Int(proposedRect.height), CGImageGetBitsPerComponent(image), 0, colorSpace, CGImageAlphaInfo.PremultipliedFirst.rawValue) else {
+                return nil
+            }
 
             // drawing
             let context = NSGraphicsContext(CGContext: bitmapContext, flipped: false)
@@ -29,7 +32,9 @@ extension NSImage {
             NSGraphicsContext.setCurrentContext(nil)
             
             // returning image
-            let scaledImageRef = CGBitmapContextCreateImage(bitmapContext)
+            guard let scaledImageRef = CGBitmapContextCreateImage(bitmapContext) else {
+                return nil
+            }
             let scaledImage = NSImage(CGImage: scaledImageRef, size: NSSize(width: imageRep.pixelsWide, height: imageRep.pixelsHigh))
             
             return scaledImage
@@ -41,7 +46,8 @@ extension NSImage {
     func writeUsingImageType(imageType: NSBitmapImageFileType, toFile file: String) -> Bool? {
         if let data = self.TIFFRepresentation {
             let imageRep = NSBitmapImageRep(data: data)
-            if let data = imageRep?.representationUsingType(imageType, properties: NSDictionary() as [NSObject : AnyObject]) {
+            let properties: [String : AnyObject] = Dictionary()
+            if let data = imageRep?.representationUsingType(imageType, properties: properties) {
                 return data.writeToFile(file, atomically: true)
             }
         }

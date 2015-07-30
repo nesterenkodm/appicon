@@ -17,14 +17,14 @@ enum AIEnvDictionaryKey : String {
 
 func AIEnvDictionaryWithFileHandle(fileHandle: NSFileHandle) -> [String: String] {
     let inputData = NSData(data: fileHandle.readDataToEndOfFile())
-    var inputString = NSString(data: inputData, encoding: NSUTF8StringEncoding) as! String
+    let inputString = NSString(data: inputData, encoding: NSUTF8StringEncoding) as! String
     
     var data = Dictionary<String, String>()
 
     for obj in inputString.componentsSeparatedByString("\n") {
         var components = obj.componentsSeparatedByString("=")
         let key = components.removeAtIndex(0) as String
-        data[key] = join("=", components)
+        data[key] = "=".join(components)
     }
     
     return data
@@ -46,12 +46,10 @@ func AILoadOriginalImage(imagePath: String, options: UInt8) -> NSImage? {
     if options & AIBurnTextOverImageOption.UseBackupCopy.rawValue > 0 {
         let backupPath = imagePath.stringByDeletingLastPathComponent.stringByAppendingPathComponent("." + imagePath.lastPathComponent)
         if !NSFileManager.defaultManager().isReadableFileAtPath(backupPath) {
-            var copyError: NSError?
-            let result = NSFileManager.defaultManager().copyItemAtPath(imagePath, toPath: backupPath, error: &copyError)
-            if !result {
-                if let error = copyError {
-                    NSLog("Copy operation failed with error \(error.localizedDescription)")
-                }
+            do {
+                try NSFileManager.defaultManager().copyItemAtPath(imagePath, toPath: backupPath)
+            } catch {
+                NSLog("Copy operation failed with error \(error)")
             }
         }
         return NSImage(contentsOfFile: backupPath)
@@ -62,7 +60,7 @@ func AILoadOriginalImage(imagePath: String, options: UInt8) -> NSImage? {
 }
 
 func AIBurnTextOverImageAtPath(text: String, imagePath: String, options: UInt8) -> Bool? {
-    if let image = AILoadOriginalImage(imagePath, options) {
+    if let image = AILoadOriginalImage(imagePath, options: options) {
         // hint NSImage that "@2x~ipad.png" image should be treated as HD image
         if let imageRep = image.bestRepresentationForRect(NSRect(origin: CGPointZero, size: image.size), context: nil, hints: nil) {
             if imagePath.hasSuffix("@2x~ipad.png") {
@@ -74,7 +72,7 @@ func AIBurnTextOverImageAtPath(text: String, imagePath: String, options: UInt8) 
             shadow.shadowOffset = CGSize(width: 0.5, height: -0.5)
             shadow.shadowColor = NSColor(calibratedWhite: 0, alpha: 0.3)
             let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = NSTextAlignment.CenterTextAlignment
+            paragraphStyle.alignment = .Center
             var attributes = [
                 NSForegroundColorAttributeName: NSColor.whiteColor(),
                 NSParagraphStyleAttributeName: paragraphStyle,
@@ -97,15 +95,15 @@ autoreleasepool {
     let env = AIEnvDictionaryWithFileHandle(NSFileHandle.fileHandleWithStandardInput())
 //    let env = AIEnvDictionaryWithFileHandle(NSFileHandle(forReadingAtPath: "/Users/chebur/Desktop/env.txt")!)
 
-    let textFirstLine = AIValueForInfoPlistKeyAtPath("CFBundleShortVersionString", env[AIEnvDictionaryKey.TargetBuildDir.rawValue]!.stringByAppendingPathComponent(env[AIEnvDictionaryKey.InfoPlistPathKey.rawValue]!)) ?? "-"
-    let textSecondLine = AIValueForInfoPlistKeyAtPath(String(kCFBundleVersionKey), env[AIEnvDictionaryKey.TargetBuildDir.rawValue]!.stringByAppendingPathComponent(env[AIEnvDictionaryKey.InfoPlistPathKey.rawValue]!)) ?? "-"
+    let textFirstLine = AIValueForInfoPlistKeyAtPath("CFBundleShortVersionString", plist: env[AIEnvDictionaryKey.TargetBuildDir.rawValue]!.stringByAppendingPathComponent(env[AIEnvDictionaryKey.InfoPlistPathKey.rawValue]!)) ?? "-"
+    let textSecondLine = AIValueForInfoPlistKeyAtPath(String(kCFBundleVersionKey), plist: env[AIEnvDictionaryKey.TargetBuildDir.rawValue]!.stringByAppendingPathComponent(env[AIEnvDictionaryKey.InfoPlistPathKey.rawValue]!)) ?? "-"
     let text = "\(textFirstLine)\n\(textSecondLine)"
 
     let path = env[AIEnvDictionaryKey.TargetBuildDir.rawValue]!.stringByAppendingPathComponent(env[AIEnvDictionaryKey.ContentsFolderPath.rawValue]!)
     if let appIcons = NSFileManager.defaultManager().filesWithPrefix(env[AIEnvDictionaryKey.AssetCatalogCompilerAppiconName.rawValue]!, atPath: path) {
         for path in appIcons {
             NSLog("Processing image at path \(path)")
-            let result = AIBurnTextOverImageAtPath(text, path, AIBurnTextOverImageOption.UseBackupCopy.rawValue)
+            let result = AIBurnTextOverImageAtPath(text, imagePath: path, options: AIBurnTextOverImageOption.UseBackupCopy.rawValue)
             if result == nil {
                 NSLog("Can't burn text over image")
             }

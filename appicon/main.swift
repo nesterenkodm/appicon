@@ -31,10 +31,11 @@ func AIEnvDictionaryWithFileHandle(fileHandle: NSFileHandle) -> [String: String]
 }
 
 func AIValueForInfoPlistKeyAtPath(key: String, plist: String) -> String? {
-    if let data = NSDictionary(contentsOfFile: plist) {
-        return data[key] as? String
+    guard let data = NSDictionary(contentsOfFile: plist) else {
+        return nil
     }
-    return nil
+
+    return data[key] as? String
 }
 
 enum AIBurnTextOverImageOption : UInt8 {
@@ -42,15 +43,11 @@ enum AIBurnTextOverImageOption : UInt8 {
     case UseBackupCopy = 1
 }
 
-func AILoadOriginalImage(imagePath: String, options: UInt8) -> NSImage? {
+func AILoadOriginalImage(imagePath: String, options: UInt8) throws -> NSImage? {
     if options & AIBurnTextOverImageOption.UseBackupCopy.rawValue > 0 {
         let backupPath = imagePath.stringByDeletingLastPathComponent.stringByAppendingPathComponent("." + imagePath.lastPathComponent)
         if !NSFileManager.defaultManager().isReadableFileAtPath(backupPath) {
-            do {
-                try NSFileManager.defaultManager().copyItemAtPath(imagePath, toPath: backupPath)
-            } catch {
-                NSLog("Copy operation failed with error \(error)")
-            }
+            try NSFileManager.defaultManager().copyItemAtPath(imagePath, toPath: backupPath)
         }
         return NSImage(contentsOfFile: backupPath)
         
@@ -59,36 +56,35 @@ func AILoadOriginalImage(imagePath: String, options: UInt8) -> NSImage? {
     }
 }
 
-func AIBurnTextOverImageAtPath(text: String, imagePath: String, options: UInt8) -> Bool? {
-    if let image = AILoadOriginalImage(imagePath, options: options) {
-        // hint NSImage that "@2x~ipad.png" image should be treated as HD image
-        if let imageRep = image.bestRepresentationForRect(NSRect(origin: CGPointZero, size: image.size), context: nil, hints: nil) {
-            if imagePath.hasSuffix("@2x~ipad.png") {
-                imageRep.size = NSSize(width: image.size.width / 2.0, height: image.size.height / 2.0)
-                image.size = imageRep.size
-            }
-
-            let shadow = NSShadow()
-            shadow.shadowOffset = CGSize(width: 0.5, height: -0.5)
-            shadow.shadowColor = NSColor(calibratedWhite: 0, alpha: 0.3)
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .Center
-            var attributes = [
-                NSForegroundColorAttributeName: NSColor.whiteColor(),
-                NSParagraphStyleAttributeName: paragraphStyle,
-                NSShadowAttributeName: shadow
-            ]
-            if let font = NSFont(name: "Menlo", size: CGFloat(7 * imageRep.pixelsWide) / imageRep.size.width) {
-                attributes[NSFontAttributeName] = font
-            }
-
-            let modifiedImage = image.imageByOverlayingText(text, withAttributes: attributes, inRect: NSRect(x: 0, y: 0, width: image.size.width, height: 22))
-            
-            return modifiedImage?.writeUsingImageType(NSBitmapImageFileType.NSPNGFileType, toFile: imagePath)
-        }
+func AIBurnTextOverImageAtPath(text: String, imagePath: String, options: UInt8) throws -> Bool? {
+    guard let image = try AILoadOriginalImage(imagePath, options: options),
+          let imageRep = image.bestRepresentationForRect(NSRect(origin: CGPointZero, size: image.size), context: nil, hints: nil) else {
+        return nil
     }
+
+    // hint NSImage that "@2x~ipad.png" image should be treated as HD image
+    if imagePath.hasSuffix("@2x~ipad.png") {
+        imageRep.size = NSSize(width: image.size.width / 2.0, height: image.size.height / 2.0)
+        image.size = imageRep.size
+    }
+
+    let shadow = NSShadow()
+    shadow.shadowOffset = CGSize(width: 0.5, height: -0.5)
+    shadow.shadowColor = NSColor(calibratedWhite: 0, alpha: 0.3)
+    let paragraphStyle = NSMutableParagraphStyle()
+    paragraphStyle.alignment = .Center
+    var attributes = [
+        NSForegroundColorAttributeName: NSColor.whiteColor(),
+        NSParagraphStyleAttributeName: paragraphStyle,
+        NSShadowAttributeName: shadow
+    ]
+    if let font = NSFont(name: "Menlo", size: CGFloat(7 * imageRep.pixelsWide) / imageRep.size.width) {
+        attributes[NSFontAttributeName] = font
+    }
+
+    let modifiedImage = image.imageByOverlayingText(text, withAttributes: attributes, inRect: NSRect(x: 0, y: 0, width: image.size.width, height: 22))
     
-    return nil
+    return modifiedImage?.writeUsingImageType(NSBitmapImageFileType.NSPNGFileType, toFile: imagePath)
 }
 
 autoreleasepool {
@@ -103,9 +99,10 @@ autoreleasepool {
     if let appIcons = NSFileManager.defaultManager().filesWithPrefix(env[AIEnvDictionaryKey.AssetCatalogCompilerAppiconName.rawValue]!, atPath: path) {
         for path in appIcons {
             NSLog("Processing image at path \(path)")
-            let result = AIBurnTextOverImageAtPath(text, imagePath: path, options: AIBurnTextOverImageOption.UseBackupCopy.rawValue)
-            if result == nil {
-                NSLog("Can't burn text over image")
+            do {
+                let result = try AIBurnTextOverImageAtPath(text, imagePath: path, options: AIBurnTextOverImageOption.UseBackupCopy.rawValue)
+            } catch {
+                NSLog("Can't burn text over image \(error)")
             }
         }
     } else {
